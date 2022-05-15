@@ -1,8 +1,11 @@
-import speech_recognition as sr
-import webbrowser
+import speech_recognition as sr # recognise speech
+import playsound # to play an audio file
+from gtts import gTTS # google text to speech
+import random
+from time import ctime # get time details
+import webbrowser # open browser
 import time
-import playsound
-import os
+import os # to remove created audio files
 
 from time import ctime
 
@@ -11,39 +14,48 @@ r = sr.Recognizer()
 def record_audio(ask = False):
     with sr.Microphone() as source:
         if ask:
-            print(ask)
+            speak(ask)
         r.adjust_for_ambient_noise(source)
         audio = r.listen(source)
         voice_data = ''
         try:
             voice_data = r.recognize_google(audio)
         except sr.UnknownValueError:
-            print('Sorry, I did not get that')
+            speak('Sorry, I did not get that')
         except sr.RequestError:
-            print('Sorry, my speech service is down')
+            speak('Sorry, my speech service is down')
         return voice_data
+
+def speak(audio_string):
+    tts = gTTS(text=audio_string, lang='en') # text to speech(voice)
+    r = random.randint(1,20000000)
+    audio_file = 'audio-' + str(r) + '.mp3'
+    tts.save(audio_file) # save as mp3
+    playsound.playsound(audio_file) # play the audio file
+    print(audio_string) # print what app said
+    os.remove(audio_file) # remove audio file
 
 def respond(voice_data):
     if 'what is your name' in voice_data:
-        print('My name is Alex')
+        speak('My name is Alex')
     if 'what time is it' in voice_data:
-        print(ctime())
+        speak(ctime())
     if 'search' in voice_data:
         search = record_audio('What do you want to search for?')
         url = 'https://google.com/search?q=' + search
         webbrowser.get().open(url)
-        print('Here is what I found for ' + search)
+        speak('Here is what I found for ' + search)
     if 'find location' in voice_data:
         location = record_audio('What is the location?')
         url = 'https://google.nl/maps/place/' + location + '/&amp;'
         webbrowser.get().open(url)
-        print('Here is the location of ' + location)
+        speak('Here is the location of ' + location)
     if 'exit' in voice_data:
         exit()
 
 time.sleep(1)
-print('How can I help you?')
+speak('How can I help you?')
 
 while(1):
-    voice_data = record_audio()
-    respond(voice_data)
+    voice_data = record_audio() # get the voice input
+    respond(voice_data) # respond
