@@ -27,6 +27,7 @@ def record_audio(ask = False):
             speak('Sorry, my speech service is down')
         return voice_data
 
+#Alex speaking function
 def speak(audio_string):
     tts = gTTS(text=audio_string, lang='en') # text to speech(voice)
     r = random.randint(1,20000000)
@@ -55,6 +56,7 @@ def respond(voice_data):
     if 'exit' in voice_data:
         exit()
 
+#initial speaking
 time.sleep(1)
 speak('How can I help you?')
 
