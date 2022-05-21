@@ -11,6 +11,7 @@ from time import ctime
 
 r = sr.Recognizer()
 
+# record audio function
 def record_audio(ask = False):
     with sr.Microphone() as source:
         if ask:
