@@ -36,6 +36,7 @@ def speak(audio_string):
     print(audio_string) # print what app said
     os.remove(audio_file) # remove audio file
 
+#respond function with find location and url query
 def respond(voice_data):
     if 'what is your name' in voice_data:
         speak('My name is Alex')
