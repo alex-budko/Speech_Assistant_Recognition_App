@@ -60,6 +60,7 @@ def respond(voice_data):
 time.sleep(1)
 speak('How can I help you?')
 
+#respond to each query
 while(1):
     voice_data = record_audio() # get the voice input
     respond(voice_data) # respond
