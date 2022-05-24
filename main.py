@@ -52,6 +52,7 @@ def respond(voice_data):
     # find location query
     if 'find location' in voice_data:
         location = record_audio('What is the location?')
+        # finds address of the location
         url = 'https://google.nl/maps/place/' + location + '/&amp;'
         webbrowser.get().open(url)
         speak('Here is the location of ' + location)
