@@ -43,11 +43,13 @@ def respond(voice_data):
         speak('My name is Alex')
     if 'what time is it' in voice_data:
         speak(ctime())
+    # search query
     if 'search' in voice_data:
         search = record_audio('What do you want to search for?')
         url = 'https://google.com/search?q=' + search
         webbrowser.get().open(url)
         speak('Here is what I found for ' + search)
+    # find location query
     if 'find location' in voice_data:
         location = record_audio('What is the location?')
         url = 'https://google.nl/maps/place/' + location + '/&amp;'
