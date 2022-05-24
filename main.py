@@ -27,7 +27,7 @@ def record_audio(ask = False):
             speak('Sorry, my speech service is down')
         return voice_data
 
-#Alex speaking function
+# Alex speaking function
 def speak(audio_string):
     tts = gTTS(text=audio_string, lang='en') # text to speech(voice)
     r = random.randint(1,20000000)
@@ -37,7 +37,7 @@ def speak(audio_string):
     print(audio_string) # print what app said
     os.remove(audio_file) # remove audio file
 
-#respond function with find location and url query
+# respond function with find location and url query
 def respond(voice_data):
     if 'what is your name' in voice_data:
         speak('My name is Alex')
