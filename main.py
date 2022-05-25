@@ -43,6 +43,8 @@ def respond(voice_data):
         speak('My name is Alex')
     if 'what time is it' in voice_data:
         speak(ctime())
+    if 'how are you' in voice_data:
+        speak('I am doing great')
     # search query
     if 'search' in voice_data:
         search = record_audio('What do you want to search for?')
